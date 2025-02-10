@@ -18,7 +18,7 @@ public class BlockQueue<E> {
 		try {
 			while (queue.size() == max)
 				notFull.wait();
-			queue.add(e);
+			queue.offer(e);
 			notEmpty.signalAll();
 		} finally {
 			lock.unlock();
@@ -30,29 +30,15 @@ public class BlockQueue<E> {
 		try {
 			while (queue.isEmpty())
 				notEmpty.wait();
-			E val = queue.remove();
+			E val = queue.poll();
 			notFull.signalAll();
 			return val;
 		} finally {
 			lock.unlock();
 		}
 	}
-
-	public static void main(final String[] args) {
-		var queue = new BlockQueue<Integer>();
-		Runnable producer = () -> {
-			try {
-				while (true)
-					queue.put(100);
-			} catch (Exception e) {}
-		};
-		Runnable consumer = () -> {
-			try {
-				while (true)
-					System.out.println(queue.take());
-			} catch (Exception e) {}
-		};
-		new Thread(producer).start();
-		new Thread(consumer).start();
+	
+	public int size() {
+		return queue.size();
 	}
 }
