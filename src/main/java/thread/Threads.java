@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Threads {
 	public static void task() {
 		System.out.println("Entering...."+Thread.currentThread().getName());
-		System.out.println("Leaving.....");
+		System.out.println("Leaving....."+Thread.currentThread().getName());
 	}
 	public static void main(final String[] args) throws Exception {
 		final int N = 10;

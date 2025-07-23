@@ -14,7 +14,9 @@ public class BlockQueueTest {
 					queue.put(name);
 					System.out.printf("Produced: %s\n", name);
 				}	
-			} catch (Exception e) {}
+			} catch (InterruptedException e) {
+				System.out.printf("Producer[%s] interrupted.\n", Thread.currentThread().getName());
+			}
 		};
 		Runnable consumer = () -> {
 			try {
@@ -22,13 +24,25 @@ public class BlockQueueTest {
 					Thread.sleep(100);
 					System.out.printf("Consumed: %s\n", queue.take());
 				}
-			} catch (Exception e) {}
+			} catch (InterruptedException e) {
+				System.out.printf("Consumer[%s] interrupted.\n", Thread.currentThread().getName());
+			}
 		};
-		var producerThread = new Thread(producer);
-		var consumerThread = new Thread(consumer);
-		producerThread.start();
-		consumerThread.start();
-		consumerThread.join();
-		producerThread.join();
+		final int SIZE = 4;
+		Thread[] producers = new Thread[SIZE];
+		Thread[] consumers = new Thread[SIZE];
+		
+		for (int i = 0; i < SIZE; i++) {
+			producers[i] = new Thread(producer);
+			consumers[i] = new Thread(consumer);
+		}
+		for (int i = 0; i < SIZE; i++) {
+			producers[i].start();
+			consumers[i].start();
+		}
+		for (Thread thread: producers)
+			thread.join();
+		for (Thread thread: consumers)
+			thread.join();
 	}
 }

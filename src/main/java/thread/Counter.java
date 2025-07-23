@@ -3,8 +3,6 @@ package thread;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.apache.logging.log4j.core.config.plugins.util.ResolverUtil.Test;
-
 public class Counter {
 
 	private Lock lock = new ReentrantLock();

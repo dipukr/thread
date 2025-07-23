@@ -13,11 +13,11 @@ public class BlockQueue<E> {
 	private Queue<E> queue = new LinkedList<E>();
 	private int max = 100;
 
-	public void put(E e) throws Exception {
+	public void put(E e) throws InterruptedException {
 		lock.lock();
 		try {
 			while (queue.size() == max)
-				notFull.wait();
+				notFull.await();
 			queue.offer(e);
 			notEmpty.signalAll();
 		} finally {
@@ -25,11 +25,11 @@ public class BlockQueue<E> {
 		}
 	}
 
-	public E take() throws Exception {
+	public E take() throws InterruptedException {
 		lock.lock();
 		try {
 			while (queue.isEmpty())
-				notEmpty.wait();
+				notEmpty.await();
 			E val = queue.poll();
 			notFull.signalAll();
 			return val;
