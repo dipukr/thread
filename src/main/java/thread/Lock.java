@@ -1,0 +1,6 @@
+package thread;
+
+public interface Lock {
+	 void lock();
+	 void unlock();
+}

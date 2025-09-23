@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 
 public class BlockQueueTest {
 	public static void main(final String[] args) throws Exception {
-		var queue = new BlockQueue<String>();
+		var queue = new BlockQueue<String>(100);
 		var faker = new Faker();
 		Runnable producer = () -> {
 			try {
@@ -14,7 +14,7 @@ public class BlockQueueTest {
 					queue.put(name);
 					System.out.printf("Produced: %s\n", name);
 				}	
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				System.out.printf("Producer[%s] interrupted.\n", Thread.currentThread().getName());
 			}
 		};
@@ -24,7 +24,7 @@ public class BlockQueueTest {
 					Thread.sleep(100);
 					System.out.printf("Consumed: %s\n", queue.take());
 				}
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				System.out.printf("Consumer[%s] interrupted.\n", Thread.currentThread().getName());
 			}
 		};

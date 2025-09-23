@@ -11,12 +11,16 @@ public class BlockQueue<E> {
 	private Condition notEmpty = lock.newCondition();
 	private Condition notFull = lock.newCondition();
 	private Queue<E> queue = new LinkedList<E>();
-	private int max = 100;
+	private int capacity;
+	
+	public BlockQueue(int capacity) {
+		this.capacity = capacity;
+	}
 
-	public void put(E e) throws InterruptedException {
+	public void put(E e) throws Exception {
 		lock.lock();
 		try {
-			while (queue.size() == max)
+			while (queue.size() == capacity)
 				notFull.await();
 			queue.offer(e);
 			notEmpty.signalAll();
@@ -25,7 +29,7 @@ public class BlockQueue<E> {
 		}
 	}
 
-	public E take() throws InterruptedException {
+	public E take() throws Exception {
 		lock.lock();
 		try {
 			while (queue.isEmpty())

@@ -1,7 +1,7 @@
 package thread;
 
 public class Dead {
-	public static void main(final String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		final Object resource1 = "resource1";
 		final Object resource2 = "resource2";
 
@@ -10,7 +10,7 @@ public class Dead {
 				synchronized (resource1) {
 					System.out.println("Thread1: locked resource1");
 					// Pause for a bit, simulating some file IO or something
-					// Basically, we just want to give the other thread a chance to run
+					// Basically want to give the other thread a chance to run
 					try { 
 						Thread.sleep(100);
 					} catch (InterruptedException e) {}
