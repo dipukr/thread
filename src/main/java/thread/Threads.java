@@ -7,7 +7,7 @@ public class Threads {
 		System.out.println("Entering...."+Thread.currentThread().getName());
 		System.out.println("Leaving....."+Thread.currentThread().getName());
 	}
-	public static void main(final String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		final int N = 10;
 		var threads = new ArrayList<Thread>();
 		for (var i = 0; i < N; i++)

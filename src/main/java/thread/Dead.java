@@ -34,7 +34,7 @@ public class Dead {
 				}
 			}
 		};
-		first.start(); 
+		first.start();
 		second.start();
 	}
 }
