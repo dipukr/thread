@@ -10,8 +10,8 @@ public class BadLock implements Lock {
 	
 	@Override
 	public void lock() {
-		while (this.locked);
-		this.locked = true;
+		while (locked);
+		locked = true;
 	}
 
 	@Override
