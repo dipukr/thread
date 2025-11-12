@@ -1,6 +1,6 @@
 package thread;
 
-public class Dead {
+public class Deadlock {
 	public static void main(String[] args) throws Exception {
 		final Object resource1 = "resource1";
 		final Object resource2 = "resource2";

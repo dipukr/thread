@@ -6,7 +6,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BlockQueue<E> {
-
 	private ReentrantLock lock = new ReentrantLock(true);
 	private Condition notEmpty = lock.newCondition();
 	private Condition notFull = lock.newCondition();

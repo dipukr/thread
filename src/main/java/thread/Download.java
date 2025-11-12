@@ -4,11 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.net.URI;
 
-public class Downloads implements Runnable {
-
+public class Download implements Runnable {
 	private String url;
 	
-	public Downloads(String url) {
+	public Download(String url) {
 		this.url = url;
 	}
 	
@@ -25,14 +24,14 @@ public class Downloads implements Runnable {
 			}
 			outStream.close();
 		} catch (Exception e) {
-			System.out.println("ERROR: Download failed.");
+			System.out.println("ERROR: Download failed");
 		}
 	}
 	
 	public static void main(String[] args) {
 		for (String arg: args) {
-			var downloads = new Downloads(arg);
-			Thread thread = new Thread(downloads);
+			var download = new Download(arg);
+			Thread thread = new Thread(download);
 			thread.start();
 		}
 	}

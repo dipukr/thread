@@ -1,6 +1,6 @@
 package thread;
 
-public class BadLock implements Lock {
+public class BadLock implements Locker {
 
 	private volatile boolean locked;
 	
@@ -10,7 +10,8 @@ public class BadLock implements Lock {
 	
 	@Override
 	public void lock() {
-		while (locked);
+		while (locked)
+			System.out.println("Another thread holding the lock.");
 		locked = true;
 	}
 

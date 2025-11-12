@@ -1,6 +1,6 @@
 package thread;
 
-public interface Lock {
+public interface Locker {
 	 void lock();
 	 void unlock();
 }
